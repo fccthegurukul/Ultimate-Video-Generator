@@ -1,9 +1,10 @@
-<img width="918" height="767" alt="Screenshot 2025-09-26 213500" src="https://github.com/user-attachments/assets/c44e6287-bbc2-4d37-9086-4e19bebb55fc" /># Ultimate-Video-Generator
+# Ultimate-Video-Generator
 A powerful, AI-powered web application for generating professional, captioned videos from a text file. Customize animations, quality, and style to create engaging content for social media and more.
 # 🎬 Ultimate Video Generator
 
 ![Ultimate Video Generator Screenshot])!
-<img width="693" height="761" alt="Screenshot 2025-09-26 213527" src="https://github.com/user-attachments/assets/a1db2405-3a2b-4a3f-a2ed-9b896e384600" /><img width="918" height="767" alt="Screenshot 2025-09-26 213500" src="https://github.com/user-attachments/assets/d44b155f-e89d-418c-8fcd-32461c2fa827" />
+<img width="918" height="767" alt="Screenshot 2025-09-26 213500" src="https://github.com/user-attachments/assets/d44b155f-e89d-418c-8fcd-32461c2fa827" />
+<img width="693" height="761" alt="Screenshot 2025-09-26 213527" src="https://github.com/user-attachments/assets/a1db2405-3a2b-4a3f-a2ed-9b896e384600" />
 <img width="1101" height="750" alt="Screenshot 2025-09-26 213430" src="https://github.com/user-attachments/assets/83348fd7-60fe-46ad-96ca-eefe0095da7e" />
 
 
