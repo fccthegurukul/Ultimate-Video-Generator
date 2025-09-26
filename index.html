@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Video Generator - Professional Caption Videos</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1>🎬 Ultimate Video Generator</h1>
+                <p>Professional transcript videos with advanced animations</p>
+                <div class="feature-badges">
+                    <span class="badge">⚡ AI Powered</span>
+                    <span class="badge">🎨 4K Quality</span>
+                    <span class="badge">🌈 8 Animations</span>
+                    <span class="badge">🎯 Custom Control</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Application Container -->
+        <div class="app-container">
+            <!-- Step 1: File Upload -->
+            <section class="step-section active" id="upload-section">
+                <div class="step-header">
+                    <div class="step-indicator">
+                        <span class="step-number">1</span>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-title">
+                        <h2>Text File Upload करें</h2>
+                        <p>Upload your script for professional video creation</p>
+                    </div>
+                </div>
+
+                <div class="upload-zone" id="upload-zone">
+                    <div class="upload-content">
+                        <div class="upload-icon">📄</div>
+                        <h3>Drop your text file here</h3>
+                        <p>या click करके file select करें (.txt files only)</p>
+                        <button class="btn btn--primary" id="file-select-btn">
+                            <span>📁</span> Select File
+                        </button>
+                        <input type="file" id="file-input" accept=".txt" style="display: none;">
+                    </div>
+                    
+                    <div class="file-requirements">
+                        <div class="requirement">✓ Text files only (.txt)</div>
+                        <div class="requirement">✓ Maximum 10MB size</div>
+                        <div class="requirement">✓ UTF-8 encoding</div>
+                        <div class="requirement">✓ Hindi/English support</div>
+                    </div>
+                </div>
+                
+                <!-- NEW: Words Per Segment Setting -->
+                <div class="settings-group-container">
+                    <h3>⚙️ Segmentation Settings</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label for="words-per-segment" class="form-label">Words per Segment</label>
+                            <input type="number" id="words-per-segment" class="form-control" value="50" min="10" max="200">
+                            <p class="setting-description">एक वीडियो सेगमेंट में कितने शब्द रखने हैं।</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Debug Information -->
+                <div class="debug-info" id="debug-info">
+                    <h4>📊 File Analysis (Debug Info)</h4>
+                    <div class="debug-stats">
+                        <div class="debug-stat">
+                            <span class="debug-label">Characters:</span>
+                            <span class="debug-value" id="debug-characters">0</span>
+                        </div>
+                        <div class="debug-stat">
+                            <span class="debug-label">Raw Words:</span>
+                            <span class="debug-value" id="debug-raw-words">0</span>
+                        </div>
+                        <div class="debug-stat">
+                            <span class="debug-label">Clean Words:</span>
+                            <span class="debug-value" id="debug-clean-words">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="file-status" id="file-status"></div>
+            </section>
+
+            <!-- Step 2: Video Quality Settings -->
+            <section class="step-section" id="quality-section">
+                <div class="step-header">
+                    <div class="step-indicator">
+                        <span class="step-number">2</span>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-title">
+                        <h2>📺 Video Quality & Format</h2>
+                        <p>Choose your desired video quality, aspect ratio, and features</p>
+                    </div>
+                </div>
+
+                <div class="quality-container">
+                    <h4>📐 Resolution</h4>
+                    <div class="quality-grid">
+                        <label class="quality-option">
+                            <input type="radio" name="quality" value="hd" checked>
+                            <div class="quality-card">
+                                <div class="quality-icon">⚡</div>
+                                <h4>HD (1080p)</h4>
+                                <p>Fast rendering</p>
+                                <span class="quality-badge recommended">Fast</span>
+                            </div>
+                        </label>
+                        
+                        <label class="quality-option">
+                            <input type="radio" name="quality" value="fullhd">
+                            <div class="quality-card">
+                                <div class="quality-icon">🎬</div>
+                                <h4>Full HD+ (1440p)</h4>
+                                <p>High quality</p>
+                                <span class="quality-badge premium">Recommended</span>
+                            </div>
+                        </label>
+                        
+                        <label class="quality-option">
+                            <input type="radio" name="quality" value="ultra4k">
+                            <div class="quality-card">
+                                <div class="quality-icon">💎</div>
+                                <h4>4K Ultra (2160p)</h4>
+                                <p>Maximum quality</p>
+                                <span class="quality-badge professional">Maximum</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- NEW: Aspect Ratio Selection -->
+                    <h4>📏 Aspect Ratio</h4>
+                    <div class="mode-options" id="aspect-ratio-options">
+                        <label class="mode-option">
+                            <input type="radio" name="aspect-ratio" value="1:1" checked>
+                            <div class="mode-card"><h4>1:1</h4><p>Square</p></div>
+                        </label>
+                        <label class="mode-option">
+                            <input type="radio" name="aspect-ratio" value="4:5">
+                            <div class="mode-card"><h4>4:5</h4><p>Portrait</p></div>
+                        </label>
+                        <label class="mode-option">
+                            <input type="radio" name="aspect-ratio" value="9:16">
+                            <div class="mode-card"><h4>9:16</h4><p>Story / Reel</p></div>
+                        </label>
+                        <label class="mode-option">
+                            <input type="radio" name="aspect-ratio" value="16:9">
+                            <div class="mode-card"><h4>16:9</h4><p>Widescreen</p></div>
+                        </label>
+                    </div>
+                    
+                    <div class="quality-features">
+                        <h4>🔧 Advanced Features</h4>
+                        <div class="features-grid">
+                            <label class="feature-checkbox">
+                                <input type="checkbox" id="anti-aliasing" checked>
+                                <span class="checkmark"></span>
+                                <span>Anti-aliasing</span>
+                            </label>
+                            <label class="feature-checkbox">
+                                <input type="checkbox" id="high-dpi" checked>
+                                <span class="checkmark"></span>
+                                <span>High DPI</span>
+                            </label>
+                            <label class="feature-checkbox">
+                                <input type="checkbox" id="subpixel-rendering" checked>
+                                <span class="checkmark"></span>
+                                <span>Subpixel Rendering</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="continue-section">
+                    <button class="btn btn--primary btn--large" id="continue-to-animation">
+                        <span class="btn-icon">🎨</span>
+                        <span class="btn-text">Continue to Animation Settings</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Step 3: Animation Styles -->
+            <section class="step-section" id="animation-section">
+                <div class="step-header">
+                    <div class="step-indicator">
+                        <span class="step-number">3</span>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-title">
+                        <h2>🎨 Animation & Style</h2>
+                        <p>Choose animation, alignment, and other styles</p>
+                    </div>
+                </div>
+                
+                <!-- NEW: Text & Appearance Settings -->
+                <div class="settings-group-container">
+                    <h3>🎨 Text & Appearance Settings</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label for="font-family" class="form-label">Font Family</label>
+                            <select id="font-family" class="form-control">
+                                <option value="Inter">Inter (Modern)</option>
+                                <option value="Poppins">Poppins (Friendly)</option>
+                                <option value="Roboto Mono">Roboto Mono (Code)</option>
+                                <option value="Arial">Arial (Classic)</option>
+                                <option value="Georgia">Georgia (Serif)</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="font-size" class="form-label">Base Font Size</label>
+                            <input type="number" id="font-size" class="form-control" value="48" min="20" max="150">
+                        </div>
+                        <div class="setting-item">
+                            <label for="line-height" class="form-label">Line Height</label>
+                            <input type="number" id="line-height" class="form-control" value="1.2" min="1" max="2" step="0.1">
+                        </div>
+                        <div class="setting-item">
+                            <label class="form-label">Text Color</label>
+                            <input type="color" id="text-color" class="color-picker" value="#FFFFFF">
+                        </div>
+                         <div class="setting-item">
+                            <label class="form-label">Background Color</label>
+                            <input type="color" id="background-color" class="color-picker" value="#000000">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="animation-container">
+                    <h4>✨ Animation Styles</h4>
+                    <div class="animation-grid">
+                         <!-- Animation buttons remain the same -->
+                        <button class="animation-btn active" data-animation="simple"> <div class="animation-icon">✨</div> <span>Simple</span> </button> <button class="animation-btn" data-animation="underline"> <div class="animation-icon">📏</div> <span>Underline</span> </button> <button class="animation-btn" data-animation="marker"> <div class="animation-icon">🖍️</div> <span>Marker</span> </button> <button class="animation-btn" data-animation="pen"> <div class="animation-icon">✒️</div> <span>Pen Write</span> </button> <button class="animation-btn" data-animation="colormorph"> <div class="animation-icon">🌈</div> <span>Color Morph</span> </button> <button class="animation-btn" data-animation="glow"> <div class="animation-icon">💫</div> <span>Glow</span> </button> <button class="animation-btn" data-animation="scalepop"> <div class="animation-icon">🔄</div> <span>Scale Pop</span> </button> <button class="animation-btn" data-animation="typewriter"> <div class="animation-icon">⌨️</div> <span>Typewriter</span> </button>
+                    </div>
+
+                    <!-- NEW: Animation Speed Setting -->
+                    <div class="settings-group-container" style="margin-bottom: 24px;">
+                        <h3>⏱️ Animation Speed</h3>
+                        <div class="setting-item">
+                            <label for="animation-speed" class="form-label">Speed (Fast <-> Slow)</label>
+                            <input type="range" id="animation-speed" min="50" max="300" value="150" class="form-range">
+                            <p class="setting-description">प्रत्येक शब्द को चेतन करने में लगने वाला समय (मिलीसेकंड)।</p>
+                        </div>
+                    </div>
+                    
+                    <div class="animation-preview">
+                        <div class="preview-canvas-container" style="position: relative; height: 120px;">
+                            <canvas id="animation-preview-canvas" width="600" height="120"></canvas>
+                        </div>
+                        <button class="btn btn--outline" id="play-preview">▶️ Play Sample</button>
+                    </div>
+                </div>
+
+                <!-- Animation Mode Selection -->
+                <div class="animation-mode-section">
+                    <h3>🎯 Animation Mode</h3>
+                    <div class="mode-options">
+                        <label class="mode-option"> <input type="radio" name="animation-mode" value="same" checked> <div class="mode-card"> <div class="mode-icon">🎭</div> <h4>Same for All Segments</h4> <p>Use one animation throughout</p> </div> </label> <label class="mode-option"> <input type="radio" name="animation-mode" value="random"> <div class="mode-card"> <div class="mode-icon">🎲</div> <h4>Random Mix</h4> <p>Auto-assign different animations</p> </div> </label> <label class="mode-option"> <input type="radio" name="animation-mode" value="custom"> <div class="mode-card"> <div class="mode-icon">🎨</div> <h4>Custom Pattern</h4> <p>Manual selection per segment</p> </div> </label>
+                    </div>
+                </div>
+
+                <!-- Text Alignment Selection -->
+                <div class="animation-mode-section" style="margin-top: 24px;">
+                    <h3>↔️ Text Alignment</h3>
+                    <div class="mode-options">
+                        <label class="mode-option"> <input type="radio" name="text-align-mode" value="left"> <div class="mode-card"> <div class="mode-icon">📄</div> <h4>Left Align</h4> <p>Align text to the left</p> </div> </label> <label class="mode-option"> <input type="radio" name="text-align-mode" value="center" checked> <div class="mode-card"> <div class="mode-icon">🏛️</div> <h4>Center Align</h4> <p>Align text to the center</p> </div> </label> <label class="mode-option"> <input type="radio" name="text-align-mode" value="right"> <div class="mode-card"> <div class="mode-icon">➡️</div> <h4>Right Align</h4> <p>Align text to the right</p> </div> </label>
+                    </div>
+                </div>
+
+
+                <div class="continue-section">
+                    <button class="btn btn--primary btn--large" id="continue-to-segments">
+                        <span class="btn-icon">📝</span>
+                        <span class="btn-text">Continue to Segment Settings</span>
+                    </button>
+                </div>
+            </section>
+            
+            <!-- Other sections (4, 5, 6) remain unchanged -->
+            <!-- Step 4: Per-Segment Animation Controls -->
+            <section class="step-section" id="segments-section">
+                <div class="step-header">
+                    <div class="step-indicator">
+                        <span class="step-number">4</span>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-title">
+                        <h2>📝 Segment Animation Settings</h2>
+                        <p>Customize animation and colors for each text segment</p>
+                    </div>
+                </div>
+
+                <div class="segments-container">
+                    <div class="segments-header">
+                        <div class="segments-stats">
+                            <div class="stat-item">
+                                <span class="stat-value" id="total-segments">0</span>
+                                <span class="stat-label">Total Segments</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="estimated-duration">0:00</span>
+                                <span class="stat-label">Est. Duration</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="segment-controls" id="segment-controls">
+                        <div class="segment-list" id="segment-list">
+                            <!-- Dynamically generated segment controls -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="continue-section">
+                    <button class="btn btn--primary btn--large" id="generate-video-btn">
+                        <span class="btn-icon">🚀</span>
+                        <span class="btn-text">Generate Professional Video</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Step 5: Video Generation Progress -->
+            <section class="step-section" id="generation-section">
+                <div class="step-header">
+                    <div class="step-indicator">
+                        <span class="step-number">5</span>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-title">
+                        <h2>🎬 Video Generation</h2>
+                        <p>Creating your professional video with AI optimization</p>
+                    </div>
+                </div>
+
+                <div class="generation-container">
+                    <div class="generation-progress">
+                        <div class="progress-header">
+                            <h3 id="progress-title">Initializing AI Engine...</h3>
+                            <span id="progress-percentage">0%</span>
+                        </div>
+                        
+                        <div class="progress-bar-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-details">
+                            <div class="progress-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Current Segment:</span>
+                                    <span id="current-segment">-</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Processing Speed:</span>
+                                    <span id="processing-speed">-</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">ETA:</span>
+                                    <span id="eta-time">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="generation-controls">
+                            <button class="btn btn--outline" id="pause-generation">⏸️ Pause</button>
+                            <button class="btn btn--outline" id="cancel-generation">❌ Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="generation-preview">
+                        <div class="preview-canvas-container" style="position: relative; height: 400px;">
+                            <canvas id="generation-canvas" width="400" height="400"></canvas>
+                        </div>
+                        <div class="preview-info">
+                            <h4>Live Preview</h4>
+                            <p>Real-time video generation preview</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 6: Video Result & Download -->
+            <section class="step-section" id="result-section">
+                <div class="step-header">
+                    <div class="step-indicator">
+                        <span class="step-number">6</span>
+                    </div>
+                    <div class="step-title">
+                        <h2>🎉 Video Ready!</h2>
+                        <p>Your professional video is ready for download</p>
+                    </div>
+                </div>
+
+                <div class="result-container">
+                    <div class="video-preview-section">
+                        <video id="final-video" controls playsinline>
+                            <source type="video/webm">
+                            <source type="video/mp4">
+                        </video>
+                        
+                        <div class="video-info-grid">
+                            <div class="video-stat">
+                                <span class="stat-icon">⏱️</span>
+                                <div class="stat-content">
+                                    <span class="stat-label">Duration</span>
+                                    <span id="final-duration">-</span>
+                                </div>
+                            </div>
+                            <div class="video-stat">
+                                <span class="stat-icon">📺</span>
+                                <div class="stat-content">
+                                    <span class="stat-label">Quality</span>
+                                    <span id="final-quality">-</span>
+                                </div>
+                            </div>
+                            <div class="video-stat">
+                                <span class="stat-icon">💾</span>
+                                <div class="stat-content">
+                                    <span class="stat-label">File Size</span>
+                                    <span id="final-size">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn--primary btn--large" id="download-video">
+                            <span class="btn-icon">⬇️</span>
+                            <span class="btn-text">Download HD Video</span>
+                        </button>
+                        
+                        <div class="secondary-actions">
+                            <button class="btn btn--outline" id="regenerate-video">
+                                🔄 Regenerate with Different Settings
+                            </button>
+                            <button class="btn btn--outline" id="new-project">
+                                📄 Start New Project
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Processing Status Toast -->
+        <div class="processing-status" id="processing-status">
+            <div class="status-content">
+                <div class="status-icon">⚡</div>
+                <div class="status-text">Processing...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Segment Control Template -->
+    <template id="segment-control-template">
+        <div class="segment-control">
+            <div class="segment-header">
+                <div class="segment-info">
+                    <span class="segment-number">Segment 1</span>
+                    <span class="segment-word-count">(50 words)</span>
+                </div>
+                <div class="segment-preview">
+                    <span class="segment-text-preview">Preview text will appear here...</span>
+                </div>
+            </div>
+            <div class="segment-settings">
+                <div class="setting-group">
+                    <label class="form-label">Animation Style:</label>
+                    <select class="form-control animation-select">
+                        <option value="simple">✨ Simple Highlight</option>
+                        <option value="underline">📏 Underline Sweep</option>
+                        <option value="marker">🖍️ Highlighter</option>
+                        <option value="pen">✒️ Pen Writing</option>
+                        <option value="colormorph">🌈 Color Morph</option>
+                        <option value="glow">💫 Glow Pulse</option>
+                        <option value="scalepop">🔄 Scale Pop</option>
+                        <option value="typewriter">⌨️ Typewriter</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label class="form-label">Animation Color:</label>
+                    <div class="color-picker-container">
+                        <input type="color" class="color-picker" value="#FFD700">
+                        <span class="color-preview">#FFD700</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
